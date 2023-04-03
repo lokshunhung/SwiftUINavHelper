@@ -2,7 +2,7 @@ import SwiftUI
 
 extension Binding {
     /// converts `Binding<T?>` to `Binding<Bool>`
-    func isActive<T>() -> Binding<Bool> where Value == Optional<T> {
+    public func isActive<T>() -> Binding<Bool> where Value == Optional<T> {
         Binding<Bool>(get: {
             self.wrappedValue != nil
         }, set: { newValue in
@@ -12,7 +12,7 @@ extension Binding {
 
     /// converts `Binding<Root>` to `Binding<Value>`
     /// by providing `WritableKeyPath<Root, Value>`
-    func map<T>(keyPath: WritableKeyPath<Value, T>) -> Binding<T> {
+    public func map<T>(keyPath: WritableKeyPath<Value, T>) -> Binding<T> {
         Binding<T>(get: {
             self.wrappedValue[keyPath: keyPath]
         }, set: { newValue in
@@ -21,7 +21,7 @@ extension Binding {
     }
 
     /// converts `Binding<T?>` to `Binding<T>?`
-    func toOptional<T>() -> Binding<T>? where Value == T? {
+    public func toOptional<T>() -> Binding<T>? where Value == T? {
         self.wrappedValue.map({ wrappedValue in
             Binding<T>(get: {
                 wrappedValue
