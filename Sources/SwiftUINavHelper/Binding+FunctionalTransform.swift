@@ -22,12 +22,6 @@ extension Binding {
 
     /// converts `Binding<T?>` to `Binding<T>?`
     public func toOptional<T>() -> Binding<T>? where Value == T? {
-        self.wrappedValue.map({ wrappedValue in
-            Binding<T>(get: {
-                wrappedValue
-            }, set: { newValue in
-                self.wrappedValue = newValue
-            })
-        })
+        Binding<T>(self)
     }
 }
